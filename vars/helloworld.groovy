@@ -1,13 +1,14 @@
 def call(body) {
     def pipelineParams = [
-        NUMBER: 1
+        NUMBER: '1'
     ]
 
     body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = pipelineParams
     body()
 
-    if ( pipelineParams.NUMBER % 2 == 0 ) {
+    def numberReceived = pipelineParams.NUMBER.toInteger()
+    if ( numberReceived % 2 == 0 ) {
         pipeline {
             agent any
             stages {
